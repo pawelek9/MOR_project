@@ -37,9 +37,22 @@ dp2<-d2[c(2:495),] #tworzenie ramki danych bez pierwszego okresu
 dpp1<-d1[c(1:494),]
 dpp2<-d2[c(1:494),]
 
+
 stopy_p1<-data.frame(dzien_1,log(dp1/dpp1))
 stopy_p2<-data.frame(dzien_1,log(dp2/dpp2))
 
+
+
+###################################################################
+############zysk oraz ryzyko dla poszczególnych spółek  ###########
+###################################################################
+s1<-log(dp1/dpp1)
+s2<-log(dp2/dpp2)
+
+colMeans(s1)
+colSds(s1)
+colMeans(s2)
+colSds(s2)
 
 ###################################################################
 ################ proces generowania danych ########################

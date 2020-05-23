@@ -56,25 +56,30 @@ spl<- read.csv("C:/Users/Janusz/Desktop/mor/pry/spl.csv")
 names1<-c("PKO","KGH","PKN","PZU","PEO")
 names2<-c("CDR","CPS","DNP","LPP","SPL")
 #utworzenie ramek danych na podstawie pobranych danych o kursach na zamknięciach
+daty <- data.frame(pko[,1])
 d1 <- data.frame(pko[,5],kgh[,5],pkn[,5],pzu[,5],peo[,5])#kursy zamknięcia 
 d2 <- data.frame(cdr[,5],cps[,5],dnp[,5],lpp[,5],spl[,5]) #kursy zamknięcia 
 #dodanie nazw do kolumn 
+colnames(daty)<-NA
 colnames(d2)<-names2
 colnames(d1)<-names1
 
 #dodanie pomocniczych ramek danych bez pierwszego okresu  aby można było później podzielić jedne przez drugi
+data_1<-data[c(2:495)]
 dp1<-d1[c(2:495),] #tworzenie ramki danych bez pierwszego okresu 
 dp2<-d2[c(2:495),] #tworzenie ramki danych bez pierwszego okresu 
 
 dpp1<-d1[c(1:494),]
 dpp2<-d2[c(1:494),]
 
-stopa_p1<-log(dp1/dpp1)
-stopa_p2<-log(dp2/dpp2)
+stopy_p1<-log(dp1/dpp1)
+stopy_p2<-log(dp2/dpp2)
+
+
 
 
 #to właściwie sie zrobi na samym oncu jak sie dane już obrobi i zrobi się stopy zwtrotu i doda daty 
-ds1<-as.timeSeries(d1) 
+d<-as.timeSeries(d1) 
 ds2<- as.timeSeries(d2)
 
 
