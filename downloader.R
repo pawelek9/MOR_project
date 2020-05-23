@@ -13,13 +13,13 @@ download_frame <- function(company,first_date= 20180101, last_date= 20190101) {
   return(data)
 }
 
-download_data <- function(vect) {
+download_data <- function(vect, first_date, last_date) {
   #Extension to download_frame fuction, instead of one variable it takes vector of
   #variables
   
   var_list = list()
   for (i in vect) {
-    var_list[[i]] = download_frame(i, 20180101, 20190101)
+    var_list[[i]] = download_frame(i, first_date, last_date)
   }
   
   return(var_list)
