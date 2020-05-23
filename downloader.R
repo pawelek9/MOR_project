@@ -1,4 +1,9 @@
 ## this file is responsible to download data
+#install.packages("dplyr")
+#install.packages('taRifx')
+#require('dplyr')
+#require('taRifx')
+
 download_frame <- function(company,first_date= 20180101, last_date= 20190101) {
   #This function download one frame
   #args:
@@ -8,7 +13,8 @@ download_frame <- function(company,first_date= 20180101, last_date= 20190101) {
   
   link = trimws(paste("https://stooq.pl/q/d/l/?s=",company,'&d1=',first_date, '&d2=',
                       last_date,'&i=d'))
-  data = read.csv(link)
+  data = read.csv(link)  %>% select(Data, Zamkniecie)
+  print(colnames(data))
   
   return(data)
 }

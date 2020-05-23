@@ -1,0 +1,7 @@
+##This script will contines libraries
+#install.packages("dplyr")
+#install.packages('taRifx')
+#install.packages('rlist')
+require('dplyr')
+require('taRifx')
+require('rlist')
