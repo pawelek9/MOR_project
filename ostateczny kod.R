@@ -129,3 +129,7 @@ for(i in 1:length(ppp2)){
 
 plot(w_p1,type="l")
 plot(w_p2,type="l")
+
+
+
+
