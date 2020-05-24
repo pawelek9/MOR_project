@@ -38,16 +38,24 @@ dpp1<-d1[c(1:494),]
 dpp2<-d2[c(1:494),]
 
 
+
 stopy_p1<-data.frame(dzien_1,log(dp1/dpp1))
 stopy_p2<-data.frame(dzien_1,log(dp2/dpp2))
-
-
+### przywracanie numeracji od 1: ostatniej wartości
+row.names(stopy_p1) <- 1:nrow(stopy_p1)
+row.names(stopy_p2) <- 1:nrow(stopy_p2)
 
 ###################################################################
 ############zysk oraz ryzyko dla poszczególnych spółek  ###########
 ###################################################################
 s1<-log(dp1/dpp1)
 s2<-log(dp2/dpp2)
+
+### przywracanie numeracji od 1: ostatniej wartości
+row.names(s1) <- 1:nrow(s1)
+row.names(s2) <- 1:nrow(s2)
+
+
 
 colMeans(s1)
 colSds(s1)
@@ -75,23 +83,49 @@ lppData2 <- portfolioData(data = sz2, spec = portfolioSpec())
 getStatistics(lppData1)
 getStatistics(lppData2)
 
-#chyba tworzy funkcje która ułoży wyniki w fajny raporcik 
-portfel_1 <- portfolioSpec()
-portfel_2 <- portfolioSpec()
+#do tej fukcji można wstawiać jakiś zadany zysk (tak jak w sloverze ograniczenia i on policzy dla tego wariancjie minimalną)
+p1 <- portfolioSpec()
+p2 <- portfolioSpec()
+
 
 
 #to jest funkcja generująca udziały spółek dla (tylko długch pozycji czyli BEZ KS) oraz (miniamlizacja wariancji=ryzyka)
-mrp1 <- efficientPortfolio( data = lppData1, spec = portfolioSpec(), constraints = "LongOnly")
-mrp2 <- efficientPortfolio( data = lppData2, spec = portfolioSpec(), constraints = "LongOnly")
+mrp1 <- efficientPortfolio( data = lppData1, spec = , constraints = "LongOnly")
+mrp2 <- efficientPortfolio( data = lppData2, spec = p2, constraints = "LongOnly")
 
-raport1<-print(mrP1)
-raport2<-print(mrP2)
+rap1<-print(mrp1)### generowanie raportów
+rap2<-print(mrp2)### generowanie raportów
 
+wagi1<-c(0.1090, 0.1331, 0.1397, 0.3061, 0.3122) 
+wagi2<-c(0.0954, 0.3626, 0.1365, 0.2123, 0.1931)
 
-class(mrp1)
+### jak będziesz pisał pracę do na stronie 188 na górze są opisane różne 
+#funkcje z pakietu w których mozna robic różne porftele
+##############################################################
+########### obliczanie stóp zwrotu portfeli ##################
+##############################################################
+por1<-s1*wagi1
+por2<-s2*wagi2
 
-mrp1@weights
+ppp1<- apply(por1,1,sum)
+ppp2<- apply(por2,1,sum)
 
+########## obliczanie wartości 10.000zł po 2 latach inwestycji #########
+w_p1<- c()
+w_p2<- c()
+w_p1[1] <- 10000
+w_p2[1] <- 10000
 
+for(i in 1:length(ppp1)){
+  w_p1[i+1] <- exp(ppp1[i])*w_p1[i]
+}
 
- 
+for(i in 1:length(ppp2)){
+  w_p2[i+1] <- exp(ppp2[i])*w_p2[i]
+}
+############################################################
+######## jakieś fajne wizualizacje danych ##################
+############################################################
+
+plot(w_p1,type="l")
+plot(w_p2,type="l")
