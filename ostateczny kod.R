@@ -81,18 +81,16 @@ portfel_2 <- portfolioSpec()
 
 
 #to jest funkcja generująca udziały spółek dla (tylko długch pozycji czyli BEZ KS) oraz (miniamlizacja wariancji=ryzyka)
-minriskPortfolio1 <- efficientPortfolio( data = lppData1, spec = portfolioSpec(), constraints = "LongOnly")
-minriskPortfolio2 <- efficientPortfolio( data = lppData2, spec = portfolioSpec(), constraints = "LongOnly")
+mrp1 <- efficientPortfolio( data = lppData1, spec = portfolioSpec(), constraints = "LongOnly")
+mrp2 <- efficientPortfolio( data = lppData2, spec = portfolioSpec(), constraints = "LongOnly")
 
-raport1<-print(minriskPortfolio1)
-raport2<-print(minriskPortfolio2)
-
-
+raport1<-print(mrP1)
+raport2<-print(mrP2)
 
 
+class(mrp1)
 
-
-
+mrp1@weights
 
 
 
