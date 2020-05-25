@@ -5,3 +5,6 @@
 require('dplyr')
 require('taRifx')
 require('rlist')
+require('purrr')
+require('timeSeries')
+require('fPortfolio')
