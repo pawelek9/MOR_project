@@ -20,8 +20,8 @@ weighted_rates_private = rates_using_portfolio(private_companies_r_lns, optm_pri
 return_priv = count_return(weighted_rates_private)
 return_public = count_return(weighted_rates_public)
 
-return_public_9 = actualization_rates(public_companies_r_lns, 2)
-return_priv_9 = actualization_rates(private_companies_r_lns, 2)
+return_public_9 = actualization_rates(public_companies_r_lns, 9)
+return_priv_9 = actualization_rates(private_companies_r_lns, 9)
 
 results = cbind(return_public_9$returns, return_priv_9$returns)  %>% as.data.frame() %>% mutate(ind = rownames(.))
 colnames(results) = c('public', 'priv', 'ind')
