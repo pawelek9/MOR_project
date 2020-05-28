@@ -29,7 +29,7 @@ count_return  <- function(weighted_returns) {
   retr<- c()
   w_p1 <- 10000
   
-  for(i in 1:length(retr_rates)){x
+  for(i in 1:length(retr_rates)){
     w_p1[i+1] <- retr_rates[i]*w_p1[i]
   }
   
