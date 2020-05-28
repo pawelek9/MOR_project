@@ -12,6 +12,7 @@ count_ln_return_rate_one_frame <- function(frame) {
   return(frame[, c(1,4)])
 }
 
+
 count_ln_returns <- function(values, names) {
   #this function computes log return for all frames
   
